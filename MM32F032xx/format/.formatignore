@@ -1,0 +1,14 @@
+# Support for comments beginning with '#', or blank line
+
+# If matching suffixes, '.xxxx' must be written as escaping '\.xxxx', such as:
+#bsp\.c
+
+# examples:
+#startup\\MM32_head
+#startup\\inc
+#HAL_
+#\.\\lib\\startup\\
+
+# ignore files:
+
+startup\\
