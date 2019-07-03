@@ -218,7 +218,7 @@ void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct)
 {
     /* Reset GPIO init structure parameters values */
     GPIO_InitStruct->GPIO_Pin   = GPIO_Pin_All;
-    GPIO_InitStruct->GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_InitStruct->GPIO_Speed = GPIO_Speed_20MHz;
     GPIO_InitStruct->GPIO_Mode  = GPIO_Mode_IN_FLOATING;
 }
 

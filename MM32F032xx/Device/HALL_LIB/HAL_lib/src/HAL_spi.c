@@ -178,7 +178,7 @@ void SPI_Init(SPI_TypeDef* SPIx, SPI_InitTypeDef* SPI_InitStruct)
         SPIx->CCTL |= 1 << 2;  // lsbfe
         SPIx->CCTL |= 1 << 3;  // spilen
     }
-    SPIx->EXTSCR = SPI_InitStruct->SPI_DataWidth;
+    SPIx->EXTCTL = SPI_InitStruct->SPI_DataWidth;
 }
 
 /**
@@ -343,7 +343,7 @@ void SPI_SendData(SPI_TypeDef* SPIx, uint32_t Data)
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
 
     /* Write in the TXREG register the data to be sent */
-    temp        = SPIx->EXTSCR;
+    temp        = SPIx->EXTCTL;
     SPIx->TXREG = Data;
     if (temp > 0x8 || temp == 0)
         SPIx->TXREG = Data >> 8;
@@ -366,11 +366,11 @@ uint32_t SPI_ReceiveData(SPI_TypeDef* SPIx)
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
 
     temp |= (u32)SPIx->RXREG;
-    if (SPIx->EXTSCR > 8 || SPIx->EXTSCR == 0)
+    if (SPIx->EXTCTL > 8 || SPIx->EXTCTL == 0)
         temp |= (u32)(SPIx->RXREG) << 8;
-    if (SPIx->EXTSCR > 16 || SPIx->EXTSCR == 0)
+    if (SPIx->EXTCTL > 16 || SPIx->EXTCTL == 0)
         temp |= (u32)(SPIx->RXREG) << 16;
-    if (SPIx->EXTSCR > 24 || SPIx->EXTSCR == 0)
+    if (SPIx->EXTCTL > 24 || SPIx->EXTCTL == 0)
         temp |= (u32)(SPIx->RXREG) << 24;
 
     return temp;
@@ -402,12 +402,12 @@ void SPI_CSInternalSelected(SPI_TypeDef* SPIx, uint16_t SPI_CSInternalSelected, 
     assert_param(IS_FUNCTIONAL_STATE(NewState));
 
     if (NewState != DISABLE) {
-        /* selected cs pin according SCSR Value */
-        SPIx->SCSR &= SPI_CSInternalSelected;
+        /* selected cs pin according NSSR Value */
+        SPIx->NSSR &= SPI_CSInternalSelected;
     }
     else {
-        /* release cs pin according SCSR Value*/
-        SPIx->SCSR |= ~SPI_CSInternalSelected;
+        /* release cs pin according NSSR Value*/
+        SPIx->NSSR |= ~SPI_CSInternalSelected;
     }
 }
 
@@ -510,7 +510,7 @@ FlagStatus SPI_GetFlagStatus(SPI_TypeDef* SPIx, uint16_t SPI_FLAG)
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     assert_param(IS_SPI_GET_FLAG(SPI_FLAG));
-    if (SPIx->EXTSCR == 8) {
+    if (SPIx->EXTCTL == 8) {
         /* Check the status of the specified SPI flag */
         if ((SPIx->CSTAT & SPI_FLAG) != (uint16_t)RESET) {
             /* SPI_FLAG is set */
@@ -525,13 +525,13 @@ FlagStatus SPI_GetFlagStatus(SPI_TypeDef* SPIx, uint16_t SPI_FLAG)
     }
     else {
         u8 number;
-        if (SPIx->EXTSCR > 0 && SPIx->EXTSCR <= 8)
+        if (SPIx->EXTCTL > 0 && SPIx->EXTCTL <= 8)
             number = 1;
-        else if (SPIx->EXTSCR <= 16)
+        else if (SPIx->EXTCTL <= 16)
             number = 2;
-        else if (SPIx->EXTSCR <= 24)
+        else if (SPIx->EXTCTL <= 24)
             number = 3;
-        else if (SPIx->EXTSCR <= 31 || SPIx->EXTSCR == 0)
+        else if (SPIx->EXTCTL <= 31 || SPIx->EXTCTL == 0)
             number = 4;
         if (((SPIx->CSTAT & 0xf00) >> 8) >= number) {
             return SET;

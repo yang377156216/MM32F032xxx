@@ -227,15 +227,6 @@ void COMP_Init(uint32_t COMP_Selection, COMP_InitTypeDef* COMP_InitStruct)
     else if (COMP_Selection == COMP_Selection_COMP2) {
         temadd = (u32) & (COMP->COMP2_CSR);
     }
-    else if (COMP_Selection == COMP_Selection_COMP3) {
-        temadd = (u32) & (COMP->COMP3_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP4) {
-        temadd = (u32) & (COMP->COMP4_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP5) {
-        temadd = (u32) & (COMP->COMP5_CSR);
-    }
 
     /*!< Configure COMP: inverting input, output redirection, hysteresis value and power mode */
     /*!< Set COMPxINSEL bits according to COMP_InitStruct->COMP_InvertingInput value */
@@ -317,15 +308,6 @@ void COMP_Cmd(uint32_t COMP_Selection, FunctionalState NewState)
     }
     else if (COMP_Selection == COMP_Selection_COMP2) {
         temadd = (u32) & (COMP->COMP2_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP3) {
-        temadd = (u32) & (COMP->COMP3_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP4) {
-        temadd = (u32) & (COMP->COMP4_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP5) {
-        temadd = (u32) & (COMP->COMP5_CSR);
     }
 
     if (NewState != DISABLE) {
@@ -411,15 +393,6 @@ uint32_t COMP_GetOutputLevel(uint32_t COMP_Selection)
     else if (COMP_Selection == COMP_Selection_COMP2) {
         temadd = (u32) & (COMP->COMP2_CSR);
     }
-    else if (COMP_Selection == COMP_Selection_COMP3) {
-        temadd = (u32) & (COMP->COMP3_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP4) {
-        temadd = (u32) & (COMP->COMP4_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP5) {
-        temadd = (u32) & (COMP->COMP5_CSR);
-    }
     /* Check if selected comparator output is high */
     if ((*(__IO uint32_t*)(temadd) & (COMP_CSR_COMPxOUT)) != 0) {
         compout = COMP_OutputLevel_High;
@@ -469,15 +442,6 @@ void COMP_LockConfig(uint32_t COMP_Selection)
     }
     else if (COMP_Selection == COMP_Selection_COMP2) {
         temadd = (u32) & (COMP->COMP2_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP3) {
-        temadd = (u32) & (COMP->COMP3_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP4) {
-        temadd = (u32) & (COMP->COMP4_CSR);
-    }
-    else if (COMP_Selection == COMP_Selection_COMP5) {
-        temadd = (u32) & (COMP->COMP5_CSR);
     }
     /* Set the lock bit corresponding to selected comparator */
     *(__IO uint32_t*)(temadd) |= (uint32_t)(COMP_CSR_COMPxLOCK);

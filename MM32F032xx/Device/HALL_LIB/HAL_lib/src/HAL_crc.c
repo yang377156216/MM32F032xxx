@@ -86,7 +86,7 @@
 void CRC_ResetDR(void)
 {
     /* Reset CRC generator */
-    CRC->CR = CR_RESET_Set;
+    CRC->CTRL = CR_RESET_Set;
 }
 
 /**
