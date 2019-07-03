@@ -430,12 +430,6 @@ void ADC_RegularChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Ra
     case ADC_Channel_9:
         ADCx->ADCHS |= CHEN9_ENABLE;
         break;
-    case ADC_Channel_10:
-        ADCx->ADCHS |= CHEN10_ENABLE;  //
-        break;
-    case ADC_Channel_11:
-        ADCx->ADCHS |= CHEN11_ENABLE;
-        break;
     case ADC_Channel_All:
         ADCx->ADCHS |= CHALL_ENABLE;  // SENSOREN or VREFINT
         break;

@@ -144,9 +144,9 @@ interrupt vector using NVIC_Init() function.
 #define COMP_CSR_COMPxLOCK ((uint32_t)0x80000000)
 
 /**********************  Bit definition for COMP_CSR register  ****************/
-#define COMP_CSR_COMPxEN ((uint32_t)0x00000001)   /*!< COMPx enable */
-#define COMP_CSR_COMP1SW1 ((uint32_t)0x00000002)  /*!< COMP1 SW1 switch control */
-#define COMP_CSR_COMPxMODE ((uint32_t)0x0000000C) /*!< COMPx power mode */
+#define COMP_CSR_COMPxEN    ((uint32_t)0x00000001)   /*!< COMPx enable */
+#define COMP_CSR_COMP1SW1   ((uint32_t)0x00000002)  /*!< COMP1 SW1 switch control */
+#define COMP_CSR_COMPxMODE  ((uint32_t)0x0000000C) /*!< COMPx power mode */
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
