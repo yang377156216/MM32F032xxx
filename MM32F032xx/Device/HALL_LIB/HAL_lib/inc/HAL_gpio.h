@@ -44,58 +44,6 @@
      ((*(uint32_t*)&(PERIPH)) == GPIOE_BASE) || ((*(uint32_t*)&(PERIPH)) == GPIOF_BASE) ||                                       \
      ((*(uint32_t*)&(PERIPH)) == GPIOG_BASE))
 
-/**
- * @brief  Output Maximum frequency selection
- */
-
-typedef enum { GPIO_Speed_10MHz = 1, GPIO_Speed_2MHz, GPIO_Speed_50MHz } GPIOSpeed_TypeDef;
-#define IS_GPIO_SPEED(SPEED) (((SPEED) == GPIO_Speed_10MHz) || ((SPEED) == GPIO_Speed_2MHz) || ((SPEED) == GPIO_Speed_50MHz))
-
-/**
- * @brief  Configuration Mode enumeration
- */
-
-typedef enum {
-    GPIO_Mode_AIN         = 0x0,   //模拟输入
-    GPIO_Mode_IN_FLOATING = 0x04,  //浮空输入
-    GPIO_Mode_IPD         = 0x28,  //下拉输入
-    GPIO_Mode_IPU         = 0x48,  //上拉输入
-    GPIO_Mode_Out_OD      = 0x14,  //通用开漏输出
-    GPIO_Mode_Out_PP      = 0x10,  //通用推免输出
-    GPIO_Mode_AF_OD       = 0x1C,  // 复用开漏输出
-    GPIO_Mode_AF_PP       = 0x18   //复用推免输出
-} GPIOMode_TypeDef;
-
-#define IS_GPIO_MODE(MODE)                                                                                                       \
-    (((MODE) == GPIO_Mode_AIN) || ((MODE) == GPIO_Mode_IN_FLOATING) || ((MODE) == GPIO_Mode_IPD) || ((MODE) == GPIO_Mode_IPU) || \
-     ((MODE) == GPIO_Mode_Out_OD) || ((MODE) == GPIO_Mode_Out_PP) || ((MODE) == GPIO_Mode_AF_OD) || ((MODE) == GPIO_Mode_AF_PP))
-
-/**
- * @brief  GPIO Init structure definition
- */
-
-typedef struct {
-    uint16_t          GPIO_Pin;
-    GPIOSpeed_TypeDef GPIO_Speed;
-    GPIOMode_TypeDef  GPIO_Mode;
-} GPIO_InitTypeDef;
-
-/**
- * @brief  Bit_SET and Bit_RESET enumeration
- */
-
-typedef enum { Bit_RESET = 0, Bit_SET } BitAction;
-
-#define IS_GPIO_BIT_ACTION(ACTION) (((ACTION) == Bit_RESET) || ((ACTION) == Bit_SET))
-
-/**
- * @}
- */
-
-/** @defgroup GPIO_Exported_Constants
- * @{
- */
-
 /** @defgroup GPIO_pins_define
  * @{
  */
@@ -121,10 +69,67 @@ typedef enum { Bit_RESET = 0, Bit_SET } BitAction;
 #define IS_GPIO_PIN(PIN) ((((PIN) & (uint16_t)0x00) == 0x00) && ((PIN) != (uint16_t)0x00))
 
 #define IS_GET_GPIO_PIN(PIN)                                                                                                     \
-    (((PIN) == GPIO_Pin_0) || ((PIN) == GPIO_Pin_1) || ((PIN) == GPIO_Pin_2) || ((PIN) == GPIO_Pin_3) ||                         \
-     ((PIN) == GPIO_Pin_4) || ((PIN) == GPIO_Pin_5) || ((PIN) == GPIO_Pin_6) || ((PIN) == GPIO_Pin_7) ||                         \
-     ((PIN) == GPIO_Pin_8) || ((PIN) == GPIO_Pin_9) || ((PIN) == GPIO_Pin_10) || ((PIN) == GPIO_Pin_11) ||                       \
-     ((PIN) == GPIO_Pin_12) || ((PIN) == GPIO_Pin_13) || ((PIN) == GPIO_Pin_14) || ((PIN) == GPIO_Pin_15))
+		(((PIN) == GPIO_Pin_0)  || ((PIN) == GPIO_Pin_1)  || ((PIN) == GPIO_Pin_2)  || ((PIN) == GPIO_Pin_3)   ||                    \
+		 ((PIN) == GPIO_Pin_4)  || ((PIN) == GPIO_Pin_5)  || ((PIN) == GPIO_Pin_6)  || ((PIN) == GPIO_Pin_7)   ||                    \
+		 ((PIN) == GPIO_Pin_8)  || ((PIN) == GPIO_Pin_9)  || ((PIN) == GPIO_Pin_10) || ((PIN) == GPIO_Pin_11)  ||                    \
+		 ((PIN) == GPIO_Pin_12) || ((PIN) == GPIO_Pin_13) || ((PIN) == GPIO_Pin_14) || ((PIN) == GPIO_Pin_15)  ||										 \
+		 ((PIN) == GPIO_Pin_All))
+
+/**
+ * @brief  Output Maximum frequency selection
+ */
+
+typedef enum { 
+		GPIO_Speed_10MHz = 1,		//最大速度 10MHz
+		GPIO_Speed_20MHz, 			//最大速度 20MHz
+		GPIO_Speed_50MHz 				//最大速度 50MHz
+} GPIOSpeed_TypeDef;
+
+#define IS_GPIO_SPEED(SPEED) (((SPEED) == GPIO_Speed_10MHz) || ((SPEED) == GPIO_Speed_20MHz) || ((SPEED) == GPIO_Speed_50MHz))
+
+/**
+ * @brief  Configuration Mode enumeration
+ */
+
+typedef enum {
+    GPIO_Mode_AIN         = 0x0,   //模拟输入
+    GPIO_Mode_IN_FLOATING = 0x04,  //浮空输入
+    GPIO_Mode_IPD         = 0x28,  //下拉输入
+    GPIO_Mode_IPU         = 0x48,  //上拉输入
+    GPIO_Mode_Out_OD      = 0x14,  //通用开漏输出
+    GPIO_Mode_Out_PP      = 0x10,  //通用推免输出
+    GPIO_Mode_AF_OD       = 0x1C,  // 复用开漏输出
+    GPIO_Mode_AF_PP       = 0x18   //复用推免输出
+} GPIOMode_TypeDef;
+
+#define IS_GPIO_MODE(MODE)                                                                                                            \
+    (((MODE) == GPIO_Mode_AIN)    || ((MODE) == GPIO_Mode_IN_FLOATING) || ((MODE) == GPIO_Mode_IPD)   || ((MODE) == GPIO_Mode_IPU) || \
+     ((MODE) == GPIO_Mode_Out_OD) || ((MODE) == GPIO_Mode_Out_PP) 		 || ((MODE) == GPIO_Mode_AF_OD) || ((MODE) == GPIO_Mode_AF_PP))
+
+/**
+ * @brief  GPIO Init structure definition
+ */
+
+typedef struct {
+    uint16_t          GPIO_Pin;
+    GPIOSpeed_TypeDef GPIO_Speed;
+    GPIOMode_TypeDef  GPIO_Mode;
+} GPIO_InitTypeDef;
+
+/**
+ * @brief  Bit_SET and Bit_RESET enumeration
+ */
+
+typedef enum { 
+		Bit_RESET = 0, 	//端口位清零
+		Bit_SET 				//端口位置位
+} BitAction;
+
+#define IS_GPIO_BIT_ACTION(ACTION) (((ACTION) == Bit_RESET) || ((ACTION) == Bit_SET))
+
+/** @defgroup GPIO_Exported_Constants
+ * @{
+ */
 
 /**
  * @}
@@ -163,10 +168,6 @@ typedef enum { Bit_RESET = 0, Bit_SET } BitAction;
      ((REMAP) == GPIO_Remap_ADC1_ETRGINJ) || ((REMAP) == GPIO_Remap_ADC1_ETRGREG) || ((REMAP) == GPIO_Remap_SWJ_NoJTRST) ||      \
      ((REMAP) == GPIO_Remap_SWJ_JTAGDisable) || ((REMAP) == GPIO_Remap_SWJ_Disable))
 
-/**
- * @}
- */
-
 /** @defgroup GPIO_Port_Sources
  * @{
  */
@@ -179,32 +180,29 @@ typedef enum { Bit_RESET = 0, Bit_SET } BitAction;
 #define GPIO_PortSourceGPIOF ((uint8_t)0x05)
 #define GPIO_PortSourceGPIOG ((uint8_t)0x06)
 #define IS_GPIO_EVENTOUT_PORT_SOURCE(PORTSOURCE)                                                                                 \
-    (((PORTSOURCE) == GPIO_PortSourceGPIOA) || ((PORTSOURCE) == GPIO_PortSourceGPIOB) ||                                         \
-     ((PORTSOURCE) == GPIO_PortSourceGPIOC) || ((PORTSOURCE) == GPIO_PortSourceGPIOD) || ((PORTSOURCE) == GPIO_PortSourceGPIOE))
+    (((PORTSOURCE) == GPIO_PortSourceGPIOA) || ((PORTSOURCE) == GPIO_PortSourceGPIOB) || ((PORTSOURCE) == GPIO_PortSourceGPIOC)  \                                      \
+     ((PORTSOURCE) == GPIO_PortSourceGPIOD) || ((PORTSOURCE) == GPIO_PortSourceGPIOF) || ((PORTSOURCE) == GPIO_PortSourceGPIOG)) 
+		 
 
 #define IS_GPIO_EXTI_PORT_SOURCE(PORTSOURCE)                                                                                     \
     (((PORTSOURCE) == GPIO_PortSourceGPIOA) || ((PORTSOURCE) == GPIO_PortSourceGPIOB) ||                                         \
      ((PORTSOURCE) == GPIO_PortSourceGPIOC) || ((PORTSOURCE) == GPIO_PortSourceGPIOD) ||                                         \
      ((PORTSOURCE) == GPIO_PortSourceGPIOE) || ((PORTSOURCE) == GPIO_PortSourceGPIOF) || ((PORTSOURCE) == GPIO_PortSourceGPIOG))
 
-/**
- * @}
- */
-
 /** @defgroup GPIO_Pin_sources
  * @{
  */
 
-#define GPIO_PinSource0 ((uint8_t)0x00)
-#define GPIO_PinSource1 ((uint8_t)0x01)
-#define GPIO_PinSource2 ((uint8_t)0x02)
-#define GPIO_PinSource3 ((uint8_t)0x03)
-#define GPIO_PinSource4 ((uint8_t)0x04)
-#define GPIO_PinSource5 ((uint8_t)0x05)
-#define GPIO_PinSource6 ((uint8_t)0x06)
-#define GPIO_PinSource7 ((uint8_t)0x07)
-#define GPIO_PinSource8 ((uint8_t)0x08)
-#define GPIO_PinSource9 ((uint8_t)0x09)
+#define GPIO_PinSource0  ((uint8_t)0x00)
+#define GPIO_PinSource1  ((uint8_t)0x01)
+#define GPIO_PinSource2  ((uint8_t)0x02)
+#define GPIO_PinSource3  ((uint8_t)0x03)
+#define GPIO_PinSource4  ((uint8_t)0x04)
+#define GPIO_PinSource5  ((uint8_t)0x05)
+#define GPIO_PinSource6  ((uint8_t)0x06)
+#define GPIO_PinSource7  ((uint8_t)0x07)
+#define GPIO_PinSource8  ((uint8_t)0x08)
+#define GPIO_PinSource9  ((uint8_t)0x09)
 #define GPIO_PinSource10 ((uint8_t)0x0A)
 #define GPIO_PinSource11 ((uint8_t)0x0B)
 #define GPIO_PinSource12 ((uint8_t)0x0C)
@@ -220,13 +218,6 @@ typedef enum { Bit_RESET = 0, Bit_SET } BitAction;
      ((PINSOURCE) == GPIO_PinSource12) || ((PINSOURCE) == GPIO_PinSource13) || ((PINSOURCE) == GPIO_PinSource14) ||              \
      ((PINSOURCE) == GPIO_PinSource15))
 
-/**
- * @}
- */
-/**
- * @}
- */
-
 /** @defgroup GPIO_Alternate_function_selection_define
  * @{
  */
@@ -237,12 +228,14 @@ typedef enum { Bit_RESET = 0, Bit_SET } BitAction;
 #define GPIO_AF_0                                                                                                                \
     ((uint8_t)0x00) /* SPI1, MC0, TIM17_BKIN, SWDIO,SWCLK,                                                                       \
 UART1*/
+
 /**
  * @brief  AF 1 selection
  */
 #define GPIO_AF_1                                                                                                                \
     ((uint8_t)0x01) /* UART1, TIM3_CH1, TIM3_CH2, TIM3_CH3,                                                                      \
 TIM3_CH4, I2C1*/
+
 /**
  * @brief  AF 2 selection
  */
@@ -254,6 +247,7 @@ TIM1_CH3, TIM1_CH4, TIM1_ETR,                                                   
 TIM1_CH2N, TIM1_CH3N, TIM2_CH2,                                                                                                  \
 TIM1 6_BKIN, TIM16_CH1N, TIM17_CH1N,                                                                                             \
 TIM1 6_CH1, TIM17_CH1 */
+
 /**
  * @brief  AF 3 selection
  */
@@ -273,6 +267,7 @@ TIM1 6_CH1, TIM17_CH1 */
  * @brief  AF 6 selection
  */
 #define GPIO_AF_6 ((uint8_t)0x06) /*  */
+
 /**
  * @brief  AF 7 selection
  */
@@ -282,10 +277,6 @@ TIM1 6_CH1, TIM17_CH1 */
     (((AF) == GPIO_AF_0) || ((AF) == GPIO_AF_1) || ((AF) == GPIO_AF_2) || ((AF) == GPIO_AF_3) || ((AF) == GPIO_AF_4) ||          \
      ((AF) == GPIO_AF_5) || ((AF) == GPIO_AF_6) || ((AF) == GPIO_AF_7))
 
-/**
- * @}
- */
-
 /** @defgroup GPIO_Exported_Macros
  * @{
  */
@@ -293,7 +284,7 @@ TIM1 6_CH1, TIM17_CH1 */
 /**
  * @}
  */
-
+ 
 /** @defgroup GPIO_Exported_Functions
  * @{
  */
@@ -312,6 +303,7 @@ void     GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal)
 void     GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal);
 void     GPIO_PinLockConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 void     GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t GPIO_AF);
+
 #endif /* __HAL_GPIO_H */
 /**
  * @}
@@ -325,4 +317,4 @@ void     GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t 
  * @}
  */
 
-/*-------------------------(C) COPYRIGHT 2016 MindMotion ----------------------*/
+/*-------------------------(C) COPYRIGHT 2019 MindMotion ----------------------*/

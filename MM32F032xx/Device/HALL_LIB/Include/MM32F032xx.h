@@ -1300,9 +1300,9 @@ typedef struct {
 #define RCC_CR_PLLDM_1      ((uint32_t)0x00200000) /*!< Bit 1 */
 #define RCC_CR_PLLDM_2      (((uint32_t)0x00400000) /*!< Bit 2 */
 /*******************  Bit definition for RCC_CFGR register  *******************/
-#define RCC_CFGR_SW         (((uint32_t)0x00000003)   /*!< SW[1:0] bits (System clock Switch) */
-#define RCC_CFGR_SW_0       (((uint32_t)0x00000001) /*!< Bit 0 */
-#define RCC_CFGR_SW_1       ((uint32_t)0x00000002) /*!< Bit 1 */
+#define RCC_CFGR_SW         ((uint32_t)0x00000003)   /*!< SW[1:0] bits (System clock Switch) */
+#define RCC_CFGR_SW_0       ((uint32_t)0x00000001) /*!< Bit 0 */
+#define RCC_CFGR_SW_1       (uint32_t)0x00000002) /*!< Bit 1 */
 
 /*!< SW configuration */
 #define RCC_CFGR_SW_HSI ((uint32_t)0x00000000) /*!< HSI selected as system clock */
